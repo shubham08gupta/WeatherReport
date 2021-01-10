@@ -1,0 +1,149 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "6b3d7079727b605529a9eb7a2c6ed97f",
+    "entities": [
+      {
+        "tableName": "Location",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`name` TEXT NOT NULL, `country` TEXT NOT NULL, `lastSavedOn` TEXT NOT NULL, `lastUpdatedAt` TEXT NOT NULL, `observationTime` TEXT, `temperature` REAL, `weatherCode` REAL, `weatherIcons` TEXT, `weatherDescriptions` TEXT, `windSpeed` REAL, `windDegree` REAL, `windDirection` TEXT, `pressure` REAL, `precipitation` REAL, `humidity` REAL, `cloudCover` REAL, `feelsLike` REAL, `uvIndex` REAL, `visibility` REAL, `isDay` TEXT, PRIMARY KEY(`name`, `lastSavedOn`))",
+        "fields": [
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "country",
+            "columnName": "country",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastSavedOn",
+            "columnName": "lastSavedOn",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastUpdatedAt",
+            "columnName": "lastUpdatedAt",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "weather.observationTime",
+            "columnName": "observationTime",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "weather.temperature",
+            "columnName": "temperature",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "weather.weatherCode",
+            "columnName": "weatherCode",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "weather.weatherIcons",
+            "columnName": "weatherIcons",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "weather.weatherDescriptions",
+            "columnName": "weatherDescriptions",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "weather.windSpeed",
+            "columnName": "windSpeed",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "weather.windDegree",
+            "columnName": "windDegree",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "weather.windDirection",
+            "columnName": "windDirection",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "weather.pressure",
+            "columnName": "pressure",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "weather.precipitation",
+            "columnName": "precipitation",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "weather.humidity",
+            "columnName": "humidity",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "weather.cloudCover",
+            "columnName": "cloudCover",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "weather.feelsLike",
+            "columnName": "feelsLike",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "weather.uvIndex",
+            "columnName": "uvIndex",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "weather.visibility",
+            "columnName": "visibility",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "weather.isDay",
+            "columnName": "isDay",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "name",
+            "lastSavedOn"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '6b3d7079727b605529a9eb7a2c6ed97f')"
+    ]
+  }
+}
