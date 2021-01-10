@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Weather Report</string>
+    <string name="title_city_country">%1$s, %2$s</string>
+    <string name="degree_celsius">%1$s°C</string>
+    <string name="title_feels_like">Feels like</string>
+    <string name="value_feels_like">%1$s°C</string>
+    <string name="title_wind_speed">Wind</string>
+    <string name="value_wind_speed">%1$s km/h</string>
+    <string name="title_humidity">Humidity</string>
+    <string name="value_humidity">%1$s %%</string>
+    <string name="title_pressure">Pressure</string>
+    <string name="value_pressure">%1$s MB</string>
+    <string name="title_visibility">Visibility</string>
+    <string name="value_visibility">%1$s Km</string>
+    <string name="title_precipitation">Precip</string>
+    <string name="value_precipitation">%1$s MM</string>
+    <string name="title_last_7_days">Last 7 days</string>
+    <string name="hint_enter_a_city">Enter a city name</string>
+
+    <!--  errors-->
+    <string name="message_offline">Please check the internet connection and try again.</string>
+    <string name="message_server_error">A server error has occurred. Please wait a while and try again.</string>
+    <string name="message_unknown_error">An unexpected error has occurred. Please wait a while and try again</string>
+    <string name="message_network_timeout">Timed out. Check the network environment and try connecting again.</string>
+    <string name="message_wrong_input">City not found</string>
+</resources>
