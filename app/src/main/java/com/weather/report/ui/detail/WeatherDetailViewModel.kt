@@ -1,6 +1,5 @@
 package com.weather.report.ui.detail
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,9 +8,12 @@ import com.weather.report.data.repository.WeatherRepository
 import com.weather.report.domain.ErrorType
 import com.weather.report.domain.Location
 import com.weather.report.domain.Resource
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class WeatherDetailViewModel @ViewModelInject constructor(
+@HiltViewModel
+class WeatherDetailViewModel @Inject constructor(
     private val weatherRepository: WeatherRepository
 ) : ViewModel() {
 
@@ -26,8 +28,7 @@ class WeatherDetailViewModel @ViewModelInject constructor(
 
     fun getWeatherForecastFor(city: String) = viewModelScope.launch {
         _isLoading.value = true
-        val resource = weatherRepository.getWeatherForecastFor(city)
-        when (resource) {
+        when (val resource = weatherRepository.getWeatherForecastFor(city)) {
             is Resource.Loading -> {
                 _isLoading.value = true
             }

@@ -1,12 +1,14 @@
 package com.weather.report.ui.list
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import com.weather.report.data.repository.WeatherRepository
 import com.weather.report.domain.Location
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class WeatherListViewModel @ViewModelInject constructor(
+@HiltViewModel
+class WeatherListViewModel @Inject constructor(
     weatherRepository: WeatherRepository
 ) : ViewModel() {
 
