@@ -33,7 +33,7 @@ class WeatherParamsAdapter : ListAdapter<WeatherParameter, WeatherParamsAdapter.
     }
 
     override fun onBindViewHolder(holder: ParamViewHolder, position: Int) {
-        val item = getItem(holder.adapterPosition)
+        val item = getItem(holder.bindingAdapterPosition)
         holder.bind(item)
     }
 
