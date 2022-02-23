@@ -22,17 +22,22 @@ import com.weather.report.util.DummyData
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class WeatherDetailFragment : Fragment(R.layout.fragment_weather_detail) {
 
     private val args: WeatherDetailFragmentArgs by navArgs()
-    private val viewModel: WeatherDetailViewModel by viewModels()
+
+    @Inject
+    lateinit var gameViewModelFactory: WeatherDetailViewModel.AssistedFactory
+    private val viewModel: WeatherDetailViewModel by viewModels {
+        WeatherDetailViewModel.provideFactory(gameViewModelFactory, args.city)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentWeatherDetailBinding.bind(view)
-        viewModel.getWeatherForecastFor(args.city)
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collectLatest { uiState ->
