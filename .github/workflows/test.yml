@@ -1,0 +1,16 @@
+name: Release debug apk
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches:
+      - main
+      - master
+
+jobs:
+  echo-hello:
+    name: Echo hello
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo Hello
