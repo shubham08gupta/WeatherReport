@@ -2,7 +2,8 @@ name: Release debug apk
 
 on:
   push:
-    branches: [ master ]
+    branches:
+      - master
 
 jobs:
   setup-java:
