@@ -34,7 +34,7 @@ class WeatherLast7DaysAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = getItem(holder.adapterPosition)
+        val item = getItem(holder.bindingAdapterPosition)
         holder.bind(item)
     }
 
