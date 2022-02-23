@@ -4,8 +4,12 @@ import android.os.Bundle
 import android.text.format.DateUtils
 import android.view.View
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,6 +20,8 @@ import com.weather.report.domain.Location
 import com.weather.report.ui.getDisplayMessage
 import com.weather.report.util.DummyData
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class WeatherDetailFragment : Fragment(R.layout.fragment_weather_detail) {
@@ -27,16 +33,31 @@ class WeatherDetailFragment : Fragment(R.layout.fragment_weather_detail) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentWeatherDetailBinding.bind(view)
         viewModel.getWeatherForecastFor(args.city)
-        viewModel.data.observe(viewLifecycleOwner) { list ->
-            showDetailsOnUI(binding, list)
-        }
-        viewModel.errorType.observe(viewLifecycleOwner) { errorType ->
-            context?.let {
-                Toast.makeText(it, errorType.getDisplayMessage(it), Toast.LENGTH_SHORT).show()
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.uiState.collectLatest { uiState ->
+                    when (uiState) {
+                        is WeatherDetailUiState.Error -> {
+                            binding.progressBar.isVisible = false
+                            context?.let {
+                                Toast.makeText(
+                                    it,
+                                    uiState.errorType.getDisplayMessage(it),
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        }
+                        WeatherDetailUiState.Loading -> {
+                            binding.progressBar.isVisible = true
+                        }
+                        is WeatherDetailUiState.Success -> {
+                            binding.progressBar.isVisible = false
+                            showDetailsOnUI(binding, uiState.data)
+                        }
+                    }
+
+                }
             }
-        }
-        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
-            binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
         }
     }
 
